@@ -26,7 +26,7 @@ while ( have_posts() ) : the_post();
         }else if( _hui('list_type') == 'thumb_if_has' && !strstr($_thumb, 'data-thumb="default"') ){
             echo '<a'._post_target_blank().' class="focus" href="'.get_permalink().'">'.$_thumb.'</a>';
         }
-        echo'<div class="excerpt-post">';
+
         echo '<header class="'.get_wow_4().'">';
 				if( _hui('home_sticky_s') && is_sticky() ){
                 echo '<div class="btn btn-danger btn-xs m-zd">置顶</div>';
@@ -51,31 +51,30 @@ while ( have_posts() ) : the_post();
             if( _hui('author_link') ){
                 $author = '<a href="'.get_author_posts_url( get_the_author_meta( 'ID' ) ).'">'.$author.'</a>';
             }
-            echo '<span class="author">'._get_the_avatar(get_the_author_meta('ID'), get_the_author_meta('email')), $author.'</span>';
+            echo '<span class="author"><i class="fa fa-user"></i>'.$author.'</span>';
         }
 
         if( _hui('post_plugin_view') ){
             echo '<span class="pv"><i class="fa fa-eye"></i>'._get_post_views().'</span>';
         }
-        
+
         if ( comments_open() && _hui('post_plugin_comm') ) {
             echo '<a class="pc" href="'.get_comments_link().'"><i class="fa fa-comments-o"></i>评论('.get_comments_number('0', '1', '%').')</a>';
         }
-		echo'<span class="time"><i class="fa fa-clock-o"></i>'.get_the_time('Y-m-d').'</span>';
         echo '</p>';
 		if( _hui('home_sticky_s') && is_sticky() ){
-                echo '<div class="zd"><i class="fa fa-zhidin"></i></div>';
-            }
-			echo '<p class="like">';
+                echo '<div class="zd"><i class="fa fa-zhidin"></i></div><p class="like zdlike">';
+            }else{
+			echo '<p class="like">';}
         if( _hui('post_plugin_like') ){
-            echo hui_get_post_like($class='post-like btn btn-primary');
+            echo hui_get_post_like($class='post-like');
         }
 
         echo '</p>';
         
         if( _hui('post_link_excerpt_s') ) _moloader('mo_post_link');
 
-    echo '</div></article>';
+    echo '</article>';
 
 endwhile; 
 

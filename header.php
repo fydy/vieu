@@ -9,15 +9,14 @@
 <meta http-equiv="Cache-Control" content="no-siteapp">
 <title><?php echo _title(); ?></title>
 <?php wp_head(); ?>
-<link rel="shortcut icon" href="<?php echo _hui('ico_src'); ?>">
+<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri() . '/img/favicon.ico' ?>">
 <!--[if lt IE 9]><script src="<?php echo get_stylesheet_directory_uri() ?>/js/libs/html5.min.js"></script><![endif]-->
 <?php tb_xzh_head_var() ?>
 </head>
 <body <?php body_class(_bodyclass()); ?>>
 <?php echo tb_xzh_render_head();
 $i= _hui('banner_style');
-echo'<header class="';if( $i>1){echo'header">';}else{echo'oldtb">';echo'<style type="text/css">.usertitle{margin-top: 66px;}.container-page{margin-top: 81px;}@media (max-width: 720px){.container-page {margin-top: 0px;}.usertitle{ margin-top: 0px;}</style>';}?>
-<section class="container">
+echo'<header class="';if( $i>1){echo'header">';}else{echo'oldtb"><div class="container">';}?>
 		<?php echo _the_logo();   ?>	
         <?php _moloader('mo_navbar', false);?>        
                   <div class="m-navbar-start"><i class="fa fa-bars m-icon-nav"></i></div>
@@ -40,5 +39,5 @@ echo'<header class="';if( $i>1){echo'header">';}else{echo'oldtb">';echo'<style t
 		?>
 
 </div>
-</section>
+<?php if( $i==1){echo'</div>';} ?>
 </header>

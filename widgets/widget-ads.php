@@ -24,7 +24,7 @@ class widget_ui_ads extends WP_Widget {
 	function form($instance) {
 		$defaults = array( 
 			'title' => '广告',
-			'code' => '<a href="http://www.vizyw.com/3132.html" target="_blank"><img src="https://viapi.oss-cn-hangzhou.aliyuncs.com/update/img/banner_1.jpg"></a>'
+			'code' => '<a href="http://www.vizyw.com/3132.html" target="_blank"><img src="http://www.vizyw.com/wp-content/uploads/2018/08/asd.png"></a>'
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
 ?>

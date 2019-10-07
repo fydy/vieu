@@ -68,16 +68,9 @@ $closeTimer = (strtotime(date('Y-m-d G:i:s'))-strtotime(get_the_time('Y-m-d G:i:
 					<div class="comt-tips"><?php comment_id_fields(); do_action('comment_form', $post->ID); ?></div>
 					<div class="position">
                   <a href="javascript:;" id="comment-smiley" title="表情"><b><i class="fa fa-smile-o"></i></b></a>
-              <!--  <input type="file" id="file" style="display:none">
-                  <a type="button" id="comt_file" title="插图片" onclick="file.click()"><i class="fa fa-image"></i></a>
-				  <b id="comt_ins_err"></b>		--->		  
-				  	
-
-
-	
-	
-	
-                  <?php echo spam_protection_math(); ?>
+                  <a href="javascript:" id="font-color" title="颜色"><b><i class="fa fa-font"></i></b></a>
+                  <a href="javascript:SIMPALED.Editor.img()" title="插图片"><b><i class="fa fa-image"></i></b></a>
+                  <a href="javascript:SIMPALED.Editor.ahref()" title="插链接"><b><i class="fa fa-link"></i></b></a><?php echo spam_protection_math(); ?>
                   </div> 
 					<button type="submit" name="submit" id="submit" tabindex="5"><?php echo _hui('comment_submit_text') ? _hui('comment_submit_text') : '提交评论' ?></button>
 					<!-- <span data-type="comment-insert-smilie" class="muted comt-smilie"><i class="icon-thumbs-up icon12"></i> 表情</span> -->
@@ -119,7 +112,6 @@ if ( have_comments() ) {
 ?>
 <div id="postcomments" class="<?php echo get_wow_2(); ?>">
 	<ol class="commentlist">
-
 		<?php 
 		_moloader('mo_comments_list', false);
 		wp_list_comments('type=comment&callback=mo_comments_list');

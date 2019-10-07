@@ -1,40 +1,78 @@
-
+<script type="text/javascript">
+/* <![CDATA[ */
+    function grin(tag) {
+      var myField;
+      tag = ' ' + tag + ' ';
+        if (document.getElementById('comment') && document.getElementById('comment').type == 'textarea') {
+        myField = document.getElementById('comment');
+      } else {
+        return false;
+      }
+      if (document.selection) {
+        myField.focus();
+        sel = document.selection.createRange();
+        sel.text = tag;
+        myField.focus();
+      }
+      else if (myField.selectionStart || myField.selectionStart == '0') {
+        var startPos = myField.selectionStart;
+        var endPos = myField.selectionEnd;
+        var cursorPos = startPos;
+        myField.value = myField.value.substring(0, startPos)
+                + tag
+                + myField.value.substring(endPos, myField.value.length);
+        cursorPos += tag.length;
+        myField.focus();
+        myField.selectionStart = cursorPos;
+        myField.selectionEnd = cursorPos;
+      }      else {
+        myField.value += tag;
+        myField.focus();
+      }
+    }
+/* ]]> */
+</script>
 <div id="smiley" style="display: none;">
-<a href="javascript:grin(':cy:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/cy.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':hanx:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/hanx.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':huaix:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/huaix.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':tx:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/tx.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':se:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/se.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':wx:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/wx.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':zk:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/zk.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':shui:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/shui.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':kuk:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/kuk.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':lh:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/lh.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':gz:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/gz.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':ku:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/ku.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':kel:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/kel.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':yiw:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/yiw.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':yun:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/yun.gif" class="wp-smiley" alt="" ></a>
-
-<a href="javascript:grin(':jy:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/jy.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':dy:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/dy.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':gg:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/gg.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':fn:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/fn.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':fendou:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/fendou.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':shuai:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/shuai.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':kl:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/kl.gif" class="wp-smiley" alt="" ></a>
-
-<a href="javascript:grin(':pj:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/pj.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':fan:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/fan.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':lw:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/lw.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':qiang:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/qiang.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':ruo:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/ruo.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':ws:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/ws.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':ok:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/ok.gif" class="wp-smiley" alt="" ></a>
-
-<a href="javascript:grin(':gy:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/gy.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':qt:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/qt.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':cj:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/cj.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':aini:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/aini.gif" class="wp-smiley" alt="" ></a>
-<a href="javascript:grin(':bu:')"><img src="<?php bloginfo('template_directory'); ?>/static/img/smilies/bu.gif" class="wp-smiley" alt="" ></a>
+<a href="javascript:grin(':?:')"      ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_question.gif"  alt="" /></a>
+<a href="javascript:grin(':razz:')"   ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_razz.gif"      alt="" /></a>
+<a href="javascript:grin(':sad:')"    ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_sad.gif"       alt="" /></a>
+<a href="javascript:grin(':evil:')"   ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_evil.gif"      alt="" /></a>
+<a href="javascript:grin(':!:')"      ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_exclaim.gif"   alt="" /></a>
+<a href="javascript:grin(':smile:')"  ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_smile.gif"     alt="" /></a>
+<a href="javascript:grin(':oops:')"   ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_redface.gif"   alt="" /></a>
+<a href="javascript:grin(':grin:')"   ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_biggrin.gif"   alt="" /></a>
+<a href="javascript:grin(':eek:')"    ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_surprised.gif" alt="" /></a>
+<a href="javascript:grin(':shock:')"  ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_eek.gif"       alt="" /></a>
+<a href="javascript:grin(':???:')"    ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_confused.gif"  alt="" /></a>
+<a href="javascript:grin(':cool:')"   ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_cool.gif"      alt="" /></a>
+<a href="javascript:grin(':lol:')"    ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_lol.gif"       alt="" /></a>
+<a href="javascript:grin(':mad:')"    ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_mad.gif"       alt="" /></a>
+<a href="javascript:grin(':twisted:')"><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_twisted.gif"   alt="" /></a>
+<a href="javascript:grin(':roll:')"   ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_rolleyes.gif"  alt="" /></a>
+<a href="javascript:grin(':wink:')"   ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_wink.gif"      alt="" /></a>
+<a href="javascript:grin(':idea:')"   ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_idea.gif"      alt="" /></a>
+<a href="javascript:grin(':arrow:')"  ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_arrow.gif"     alt="" /></a>
+<a href="javascript:grin(':neutral:')"><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_neutral.gif"   alt="" /></a>
+<a href="javascript:grin(':cry:')"    ><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_cry.gif"       alt="" /></a>
+<a href="javascript:grin(':mrgreen:')"><img src="<?php bloginfo('template_url'); ?>/img/smilies/icon_mrgreen.gif"   alt="" /></a>
+</div>
+<div id="fontcolor" style="display: none;">
+<a href="javascript:SIMPALED.Editor.red()" style="background-color: red"></a>
+<a href="javascript:SIMPALED.Editor.green()" style="background-color: green"></a>
+<a href="javascript:SIMPALED.Editor.blue()" style="background-color: blue"></a>
+<a href="javascript:SIMPALED.Editor.magenta()" style="background-color: magenta"></a>
+<a href="javascript:SIMPALED.Editor.yellow()" style="background-color: yellow"></a>
+<a href="javascript:SIMPALED.Editor.chocolate()" style="background-color: chocolate"></a>
+<a href="javascript:SIMPALED.Editor.black()" style="background-color: black"></a>
+<a href="javascript:SIMPALED.Editor.aquamarine()" style="background-color: aquamarine"></a>
+<a href="javascript:SIMPALED.Editor.lime()" style="background-color: lime"></a>
+<a href="javascript:SIMPALED.Editor.fuchsia()" style="background-color: fuchsia"></a>
+<a href="javascript:SIMPALED.Editor.orange()" style="background-color: orange"></a>
+<a href="javascript:SIMPALED.Editor.thistle()" style="background-color: thistle"></a>
+<a href="javascript:SIMPALED.Editor.brown()" style="background-color: brown"></a>
+<a href="javascript:SIMPALED.Editor.peru()" style="background-color: peru"></a>
+<a href="javascript:SIMPALED.Editor.deeppink()" style="background-color: deeppink"></a>
+<a href="javascript:SIMPALED.Editor.purple()" style="background-color: purple"></a>
+<a href="javascript:SIMPALED.Editor.slategray()" style="background-color: slategray"></a>
+<a href="javascript:SIMPALED.Editor.tomato()" style="background-color: tomato"></a>
 </div>

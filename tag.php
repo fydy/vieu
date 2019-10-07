@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <section class="container">
-
+<?php _the_ads($name='ads_tag_01', $class='asb-tag asb-tag-01') ?>
 <?php echo '<div class="pagetitle"><h1>标签：', single_tag_title(), '</h1>'.$pagedtext.'</div>'; ?>
 	<div class="content-wrap">
 	<div class="content">
@@ -16,7 +16,6 @@
 		
 		get_template_part( 'excerpt' );
 		_moloader('mo_paging');
-		echo  _the_ads($name='ads_tag_01', $class='asb-tag asb-tag-01');
 		?>
 	</div>
 	</div>

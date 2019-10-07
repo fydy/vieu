@@ -8,6 +8,7 @@ function unregister_d_widget(){
 
 $widgets = array(
 	'sticky',
+	'statistics',
 	'ads',
 	'textads',
 	'comments',
@@ -16,8 +17,7 @@ $widgets = array(
 	'viads',
 	'links',
 	'tags',
-	'product',
-	'notice'
+    'authorinfo'
 );
 
 foreach ($widgets as $widget) {

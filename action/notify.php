@@ -157,7 +157,6 @@ function iwilling_delete_user( $user_id ) {
 add_action( 'delete_user', 'iwilling_delete_user' );
 
 // WordPress 发布新文章后邮件通知已注册的用户
-
 function newPostNotify($post_ID) {
     if( wp_is_post_revision($post_ID) ) return;
     global $wpdb;
@@ -180,5 +179,5 @@ function newPostNotify($post_ID) {
         wp_mail($wp_user_email, $subject, $message, $message_headers); 
     }
 }
-if(_hui('post_email_s')){ add_action('publish_post', 'newPostNotify');}
+add_action('publish_post', 'newPostNotify');
 ?>

@@ -31,7 +31,8 @@
 			</div>
 		<?php } ?>
 		<p>&copy; <?php echo date('Y'); ?> <a href="<?php echo home_url() ?>"><?php echo get_bloginfo('name') ?></a> &nbsp; <?php echo _hui('footer_seo') ?></p>
-		<?php echo _hui('trackcode') ?>
+	  </p>数据查询次数：<?php echo get_num_queries(); ?> | 消耗时间： <?php timer_stop(3);?> | 在线人数：<?php echo get_num_queries();?></p>	
+      <?php echo _hui('trackcode') ?>
 	</div>
 </footer>
 <?php if(_hui('all_fonts')) { ?>
@@ -75,13 +76,12 @@ font-family: xmlt,Microsoft Yahei; }
 	}else{
 		$roll = json_encode(array());
 	}
-	
-	if( _hui('sideroll_m_s') ){
-		echo '<style>@media (max-width: 720px) {.sidebar {display: block;float: none;width: auto;margin: 10px;clear: both;}}</style>';
-	}
 
 	_moloader('mo_get_user_rp'); 
 	?>
+
+
+
 <!---底部均为重要文件，请勿修改，如修改损坏本站概不负责--->
 <script>
 window.jsui={
@@ -97,12 +97,16 @@ window.jsui={
 	qq_tip: '<?php echo _hui('fqq_s') ? _hui('fqq_tip') : '' ?>',
 	wintip_s: '<?php echo get_wintip_srollbar() ?>',
 	collapse_title: '<?php echo _hui('collapse_title') ?>',
-	wintip_m: '<?php echo get_wintip_width() ?>',
-	bing_img: '<?php echo bing_img() ?>',
-	notices_s:  '<?php echo get_notices() ?>',
-	notices_title:  '<?php echo _hui('notices_title') ?>',
-	notices_content:  '<?php echo _hui('notices_content') ?>'
+	wintip_m: '<?php echo get_wintip_width() ?>'
 };
+</script>
+
+
+<script src="<?php bloginfo('template_directory'); ?>/js/activate-power-mode.js "></script>
+<script>
+    POWERMODE.colorful = true; // ture 为启用礼花特效
+    POWERMODE.shake = false; // false 为禁用震动特效
+    document.body.addEventListener('input', POWERMODE);
 </script>
 <?php if (_hui('lightbox_s') && is_single()) { ?>
 <script>
@@ -125,13 +129,7 @@ window.jsui={
 <script type="text/javascript">
 var ajax_sign_object = <?php echo ajax_sign_object(); ?>;
 </script>
-
 <?php _moloader('mo_wintips', false);?>
 <?php wp_footer(); ?>
-
-
-
-
-
 </body>
 </html>

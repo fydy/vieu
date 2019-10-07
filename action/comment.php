@@ -101,7 +101,7 @@ if( $loguser ){
 echo '</div>';
 //内容
 echo '<div class="comt-main" id="div-comment-'.get_comment_ID().'">';
-	echo str_replace(' src=', ' src=', convert_smilies(get_comment_text()));
+	echo str_replace(' src=', ' data-src=', convert_smilies(get_comment_text()));
 	echo '<div class="comt-meta"><span class="comt-author">'.get_comment_author_link().'</span>';
     echo '<time>'._get_time_ago($comment->comment_date).'</time>'; 
 	echo '</div>';

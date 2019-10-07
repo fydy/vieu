@@ -76,7 +76,7 @@ function mod_newcomments( $limit,$outpost,$outer ){
 
 	$output = '';
 	foreach ( $comments as $comment ) {
-		$output .= '<li class="'.get_wow_4().'"><a href="'.get_comment_link($comment->comment_ID).'" title="'.$comment->post_title.'上的评论"><time> '._get_time_ago( $comment->comment_date ).'</time>'.get_avatar($user_id=$comment->user_id, $user_email=$comment->comment_author_email).' <span>'.$comment->comment_author.'</span><p>'.str_replace(' src=', ' src=', convert_smilies(strip_tags($comment->com_excerpt))).'</p></a></li>';
+		$output .= '<li class="'.get_wow_4().'"><a href="'.get_comment_link($comment->comment_ID).'" title="'.$comment->post_title.'上的评论"><time> '._get_time_ago( $comment->comment_date ).'</time>'.get_avatar($user_id=$comment->user_id, $user_email=$comment->comment_author_email).' <span>'.$comment->comment_author.'</span><p>'.str_replace(' src=', ' data-original=', convert_smilies(strip_tags($comment->com_excerpt))).'</p></a></li>';
 	}
 	
 	echo $output;

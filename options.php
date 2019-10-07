@@ -105,8 +105,8 @@ function optionsframework_options() {
 	}
 
 	// If using image radio buttons, define a directory path
-	$imagepath =  get_template_directory_uri() . '/static/img/';
-	$qrcode =  get_template_directory_uri() . '/static/img/qrcode.png';
+	$imagepath =  get_template_directory_uri() . '/img/';
+	$qrcode =  get_template_directory_uri() . '/img/qrcode.png';
 	$adsdesc =  __('可添加任意广告联盟代码或自定义代码', 'haoui');
 
 	$options = array();
@@ -129,12 +129,7 @@ function optionsframework_options() {
 		'type' => "checkbox",
 		'std' => true,
 		'desc' => __('开启', 'haoui').__('（开启后图片logo会失效，字体logo修改教程请查看群文件）', 'haoui'));
-	$options[] = array(
-		'name' => __('网站ico', 'haoui'),
-		'id' => 'ico_src',
-		'std' => $imagepath . 'favicon.ico',
-		'desc' => '建议尺寸48x48',
-		'type' => 'upload');	
+		
 	$options[] = array(
 		'name' => __('布局', 'haoui'),
 		'id' => 'layout',
@@ -232,6 +227,14 @@ function optionsframework_options() {
 
 
 	$options[] = array(
+		'name' => __('jQuery底部加载', 'haoui'),
+		'id' => 'jquery_bom',
+		'type' => "checkbox",
+		'std' => false,
+		'desc' => __('开启', 'haoui').__('（可提高页面内容加载速度，但部分依赖jQuery的插件可能失效）', 'haoui'));
+
+
+	$options[] = array(
 		'name' => __('Gravatar 头像获取', 'haoui'),
 		'id' => 'gravatar_url',
 		'std' => "ssl",
@@ -268,12 +271,23 @@ function optionsframework_options() {
 		'std' => false,
 		'desc' => __('开启', 'haoui').__('（主题已内置no-category插件功能，请不要安装插件；<b>开启后请去设置-固定连接中点击保存即可）</b>', 'haoui'));
 
+	$options[] = array(
+		'name' => __('品牌文字', 'haoui'),
+		'id' => 'brand',
+		'std' => "欢迎光临\n我们一直在努力",
+		'desc' => __('显示在Logo旁边的两个短文字，请换行填写两句文字（短文字介绍）', 'haoui'),
+		'settings' => array(
+			'rows' => 2
+		),
+		'type' => 'textarea');
+
+	
 
 	$options[] = array(
 		'name' => __('网站底部信息', 'haoui'),
 		'id' => 'footer_seo',
-		'std' => '<a href="'.site_url('/sitemap').'">'.__('网站地图', 'haoui').'</a>'."\n",
-		'desc' => __('备案号可写于此，网站地图可自行新建sitemap页面自动生成', 'haoui'),
+		'std' => '<a href="'.site_url('/sitemap.xml').'">'.__('网站地图', 'haoui').'</a>'."\n",
+		'desc' => __('备案号可写于此，网站地图可自行使用sitemap插件自动生成', 'haoui'),
 		'type' => 'textarea');
 
 	$options[] = array(
@@ -299,6 +313,12 @@ function optionsframework_options() {
 		),
 		'type' => 'textarea');
 
+	$options[] = array(
+		'name' => __('PC端滚动时导航固定', 'haoui'),
+		'id' => 'nav_fixed',
+		'type' => "checkbox",
+		'std' => false,
+		'desc' => __('开启', 'haoui').__('由于网址导航左侧菜单的固定，故对网址导航页面无效', 'haoui'));
 
 	$options[] = array(
 		'name' => __('新窗口打开文章', 'haoui'),
@@ -308,11 +328,26 @@ function optionsframework_options() {
 		'desc' => __('开启', 'haoui'));
 
 
+	$options[] = array(
+		'name' => __('首页不显示该分类下文章', 'haoui'),
+		'id' => 'notinhome',
+		'options' => $options_categories,
+		'type' => 'multicheck');
+
+	$options[] = array(
+		'name' => __('首页不显示以下ID的文章', 'haoui'),
+		'id' => 'notinhome_post',
+		'std' => "11245\n12846",
+		'desc' => __('每行填写一个文章ID', 'haoui'),
+		'settings' => array(
+			'rows' => 2
+		),
+		'type' => 'textarea');
 
 	$options[] = array(
 		'name' => __('分页无限加载页数', 'haoui'),
 		'id' => 'ajaxpager',
-		'std' => 0,
+		'std' => 5,
 		'class' => 'mini',
 		'desc' => __('为0时表示不开启该功能', 'haoui'),
 		'type' => 'text');
@@ -338,7 +373,7 @@ function optionsframework_options() {
 	$options[] = array(
 		'id' => 'fqq_id',
 		'desc' => 'QQ号码',
-		'std' => '1452938190',
+		'std' => '4700003344',
 		'type' => 'text');
 
 	$options[] = array(
@@ -383,7 +418,7 @@ function optionsframework_options() {
 	$options[] = array(
 		'name' => __('首页描述(description)', 'haoui'),
 		'id' => 'description',
-		'std' => __('本站是一个高端大气上档次的网站', 'haoui'),
+		'std' => __('源码社 www.nicedowns.com  精品商业资源免费下载', 'haoui'),
 		'desc' => __('描述有利于SEO优化，建议字数在30-70之间', 'haoui'),
 		'settings' => array(
 			'rows' => 3
@@ -413,8 +448,6 @@ function optionsframework_options() {
 	$options[] = array(
 		'name' => __('首页布局', 'haoui'),
 		'type' => 'heading');
-	$options[] = array(
-     'desc' => '下方操作涉及分类ID和文章ID，不知道怎么查看ID的请访问 www.baidu.com');
 
 
 		 $options[] = array(
@@ -425,37 +458,22 @@ function optionsframework_options() {
 		'type' => 'radio',
 		'options' => array('index-blog' => __( '博客模式', 'theme-textdomain' ),'index-card' => __( '卡片模式', 'theme-textdomain' ),'index-cms' => __( 'CMS模式', 'theme-textdomain' ),)
 	);
-
+	
 	$options[] = array(
-		'name' => __('非CMS 首页不显示该分类下文章', 'haoui'),
-		'id' => 'notinhome',
-		'options' => $options_categories,
-		'type' => 'multicheck');
-
-	$options[] = array(
-		'name' => __('非CMS 首页不显示以下ID的文章', 'haoui'),
-		'id' => 'notinhome_post',
-		'std' => "123456\n654321",
-		'desc' => __('每行填写一个文章ID', 'haoui'),
-		'settings' => array(
-			'rows' => 2
-		),
-		'type' => 'textarea');
-
-	$options[] = array(
-		'name' => __('CMS模式下最新文章', 'haoui'),
+		'name' => __('CMS最新文章', 'haoui'),
 		'id' => 'index_cms_new',
 		'type' => "checkbox",
-		'std' => true,
+		'std' => false,
 		'desc' => __('开启（开启博客模式和卡片模式请关闭）', 'haoui'));
 	$options[] = array(
-	   'class' => 'op-multicheck',
-		'desc' => '显示数量请前往[设置>阅读>博客页面至多显示]，排除分类勾选上方的设置');
-		
-		
+		'id' => 'index_cms_new_list',
+		'type' => "text",
+		'std' => '5',
+		'desc' => __('显示数量', 'haoui').__('（置顶文章不包括其中）', 'haoui'),
+		'class' => 'op-multicheck mini');
 	$options[] = array(
 		'name' => __( 'CMS首页排除的分类', 'theme-textdomain' ),
-		'desc' => __( '这个为CMS显示模块的排除，如要排除分类，那么下方模板样式对应要排除的分类ID不要勾上模板；排除的分类ID将不会显示在首页，中间用英文逗号隔开例如:1,2,3', 'theme-textdomain' ),
+		'desc' => __( '排除的分类ID将不会显示在首页，中间用英文逗号隔开例如:1,2,3', 'theme-textdomain' ),
 		'id' => 'cmsundisplaycats',
 		'std' => '',
 		'class' => 'mini',
@@ -540,7 +558,12 @@ function optionsframework_options() {
 			'options' => $options_categories
 		);
 	}		
-
+	$options[] = array(
+		'name' => __('首页最新评论 or 随机文章推荐', 'haoui'),
+		'id' => 'latest_visit_s',
+		'type' => "checkbox",
+		'std' => false,
+		'desc' => __('开启', 'haoui').__('（开启后会在banner下增加一个模块，展示最新发表过评论的文章，经典模式下显示随机文章，手机默认不显示', 'haoui'));
     $options[] = array(
 		'name' => __('关闭前台登录', 'haoui'),
 		'id' => 'ligin_off',
@@ -554,13 +577,6 @@ function optionsframework_options() {
 		'type' => "checkbox",
 		'std' => true,
 		'desc' => __('开启', 'haoui').__('（开启后会在公告下新增一个模块，若是开启“经典模式”则只显示热门文章且手机不显示）', 'haoui'));
-	$options[] = array(
-		'id' => 'latest_visit_st',
-		'class' => 'op-multicheck',
-		'std' => '1',
-		'type' => 'radio',
-		'options' => array('1' => __( '默认样式', '1' ),'2' => __( '焦点图样式', '2' ),'3' => __( '不显示前标', '3' ),));
-
 	$options[] = array(
 		'desc' => __('随机文章⬇⬇⬇⬇⬇'));
 	$options[] = array(
@@ -611,41 +627,50 @@ function optionsframework_options() {
 		'desc' => __('手机端默认不显示', 'haoui'),
 		'id' => 'index_tool',
 		'class' => 'op-multicheck',
-		'std' => '<div class="themes-module">
-	<div class="container">
-	<ul>
-            <li>
-			<a href="https://viapi.cn" target="_blank">
-                <i class="fa fa-code"></i>
-                <strong>免费开放API</strong>
-                <p>贯穿国内外常用网络API接口集合，免费在线调用享受极致开发体验</p>
-				</a>
-            </li>
-            <li>
-			<a href="http://mz.cclmz.cn" target="_blank">
-                <i class="fa fa-thumbs-o-up"></i>
-                <strong>免费秒赞挂机平台</strong>
-                <p>及时响应、持久稳定，四年间从未间断，稳定四年以来一直免费开放</p>
-				</a>
-            </li>
-            <li>
-			<a href="http://fm.viapi.cn" target="_blank">
-                <i class="fa fa-music"></i>
-                <strong>FM网页音乐调用</strong>
-                <p>免费提供网页悬浮播放器在线调用及付费音乐在线免费试听下载</p>
-				</a>
-            </li>
-            <li>
-			<a href="http://qr.viapi.cn" target="_blank">
-                <i class="fa fa-qrcode"></i>
-                <strong>三合一收款码</strong>
-                <p>免费在线合并支付宝、微信、QQ钱包收款二维码，实现更加便捷收款</p>
-				</a>
-            </li>
-        </ul>
-
-	</div>
-</div>',
+		'std' => '<article class="excerpt-list">
+  <div class="col-sm-2 col-xs-4 col-list">
+    <div class="indexebox indexebox-l">
+      <i class="fa fa-cogs"></i>
+      <h4>常用工具</h4>
+      <p>各种建站小工具</p>
+      <a class="btn btn-primary btn-sm" href="#">点击进入</a></div>
+  </div>
+  <div class="col-sm-2 col-xs-4 col-list">
+    <div class="indexebox indexebox-2">
+      <i class="fa fa-music"></i>
+      <h4>FM音乐</h4>
+      <p>音乐点播页面</p>
+      <a class="btn btn-primary btn-sm" href="http://fm.relzz.com">点击进入</a></div>
+  </div>
+  <div class="col-sm-2 col-xs-4 col-list">
+    <div class="indexebox indexebox-3">
+      <i class="fa fa-list"></i>
+      <h4>文章归档</h4>
+      <p>所有文章都搁着</p>
+      <a class="btn btn-primary btn-sm" href="#">点击进入</a></div>
+  </div>
+  <div class="col-sm-2 col-xs-4 col-list">
+    <div class="indexebox indexebox-4">
+      <i class="fa fa-link"></i>
+      <h4>友情链接</h4>
+      <p>网站合作互赢！</p>
+      <a class="btn btn-primary btn-sm" href="/links">点击进入</a></div>
+  </div>
+  <div class="col-sm-2 col-xs-4 col-list">
+    <div class="indexebox indexebox-5">
+      <i class="fa fa-twitch"></i>
+      <h4>留言互动</h4>
+      <p>意见反馈提问区</p>
+      <a class="btn btn-primary btn-sm" href="#">点击进入</a></div>
+  </div>
+  <div class="col-sm-2 col-xs-4 col-list">
+    <div class="indexebox indexebox-6">
+      <i class="fa fa-wordpress fa-spin fa-3x fa-fw"></i>
+      <h4>唯爱网络</h4>
+      <p>专注资源分享</p>
+      <a class="btn btn-danger btn-sm" href="http://www.vizyw.com">点击进入</a></div>
+  </div>
+</article>',
 		'type' => 'textarea');
 
 	$options[] = array(
@@ -660,25 +685,7 @@ function optionsframework_options() {
 		'desc' => __('置顶文章显示数目', 'haoui'),
 		'class' => 'op-multicheck mini',
 		'type' => 'select');
-	
-	$options[] = array(
-		'name' => __('不同时段温馨提醒', 'haoui'),
-		'id' => 'notices_s',
-		'type' => "checkbox",
-		'std' => false,
-		'desc' => __('开启', 'haoui'));
-	$options[] = array(
-		'id' => 'notices_title',
-		'std' => '温馨提示',
-		'desc' => __('提醒标题'),
-		'class' => 'op-multicheck',
-		'type' => 'text');
-	$options[] = array(
-		'desc' => __('不同时段的提示语，每一句提示语表示不同时段，用 “ | ” 符号分割，不能出现空格，共16句，其中上午9点到晚上23点提示语为两小时并用一句，其他时间一小时一句，对应语句的时间顺序 0-1-2-3-4-5-6-7-8-（9点到10点）-(11点到12点)-(13点到17点)-(18点到19点)-(20点到21点)-(22点到23)', 'haoui'),
-		'id' => 'notices_content',
-		'class' => 'op-multicheck',
-		'std' => '现在已经过凌晨了，身体是无价的资本喔，小伙伴早点休息吧！|凌晨1点多了，工作是永远都做不完的，小伙伴别熬坏身子！|亲爱的小伙伴该休息了，身体可是革命的本钱啊！|夜深了，熬夜很容易导致身体内分泌失调，长痘痘的！|四点过了额(⊙o⊙)…，你明天不学习工作吗？？？|你知道吗，此时是国内网络速度最快的时候！|清晨好，这么早就来网站啦，谢谢小伙伴的关注哦，昨晚做的梦好吗？|新的一天又开始了，祝你过得快乐！|小伙伴早上好哦，一天之际在于晨，又是美好的一天！|上午好！今天你看上去好精神哦！|小伙伴啊！该吃午饭啦！有什么好吃的？您有中午休息的好习惯吗？|下午好！外面的天气好吗？记得朵朵白云曾捎来朋友殷殷的祝福。|太阳落山了！快看看夕阳吧！如果外面下雨，就不必了 ^_^ |晚上好，小伙伴今天的心情怎么样？去留言板诉说一下吧！|忙碌了一天，累了吧？去看看最新的新闻资讯醒醒脑吧！|这么晚了，小伙伴还在上网？早点洗洗睡吧，睡前记得洗洗脸喔！明天一天都会萌萌哒！',
-		'type' => 'textarea');
+
 		
 	$options[] = array(
 		'name' => __('后台登录密码保护', 'haoui'),
@@ -711,7 +718,7 @@ function optionsframework_options() {
 		'name' => __('自动使用文章第一张图作为缩略图', 'haoui'),
 		'id' => 'thumb_postfirstimg_s',
 		'type' => "checkbox",
-		'std' => true,
+		'std' => false,
 		'desc' => __('开启', 'haoui').'，特别注意：如果文章已经设置特色图像或外链缩略图输入，此功能将无效。');
 
 	$options[] = array(
@@ -775,6 +782,60 @@ function optionsframework_options() {
 			'flipInY' => __('左右翻转', 'haoui')
 		));
 
+   $options[] = array(
+		'name' => '侧栏关于我们',
+		'id' => 'celan_about_s',
+		'type' => "checkbox",
+		'std' => true,
+		'desc' => '开启');
+		
+   $options[] = array(
+		'id' => 'celan_date_s',
+		'type' => "checkbox",
+		'class' => 'op-multicheck',
+		'std' => true,
+		'desc' => '显示时间');
+
+   $options[] = array(
+		'id' => 'celan_statistics_s',
+		'type' => "checkbox",
+		'std' => true,
+		'class' => 'op-multicheck',
+		'desc' => '站点统计');
+		
+   $options[] = array(
+		'id' => 'celan_last_s',
+		'type' => "checkbox",
+		'std' => true,
+		'class' => 'op-multicheck',
+		'desc' => '最后更新');
+		$options[] = array(
+        'desc' => '背景图（建议尺寸360*200）');
+		
+    $options[] = array(
+		'id' => 'celan_img_s',
+		'std' =>  $imagepath . 'about_bg.png',
+		'class' => 'op-multicheck',
+		'type' => 'upload');
+	
+	$options[] = array(
+		'id' => 'celan_title_s',
+		'std' => '关于我们',
+		'desc' => __('标题', 'haoui'),
+		'class' => 'op-multicheck',
+		'type' => 'text');
+	$options[] = array(
+		'id' => 'celan_keyword_s',
+		'std' => '专注于网络资源搜集共享与发布！',
+		'desc' => __('推广语', 'haoui'),
+		'class' => 'op-multicheck',
+		'type' => 'text');
+	$options[] = array(
+		'id' => 'celan_description_s',
+		'std' => '本站从2014年开始至今始终坚持免费搜集分享各种网络资源，现如今本站已发展形成网站源码、主题模板、WordPress教程、破解软件、电脑软件、操作系统、经验教程、影视资源等各个领域的资源！',
+		'desc' => __('详细介绍（支持html代码）', 'haoui'),
+		'class' => 'op-multicheck',
+		'type' => 'textarea');
 		
 		
 /*
@@ -792,18 +853,10 @@ function optionsframework_options() {
 	$options[] = array(
 		'name' => __('自定义背景', 'haoui'),
 		'type' => 'heading');
-
 $options[]=array(
 'name'=>__('开启自定义网站背景','haoui'),
 'id'=>'bg_checker',
 'desc'=>__('勾选之后请设置下面的值','haoui'),
-'type'=>'checkbox'
-);
-$options[]=array(
-'name'=>__('必应每日背景','haoui'),
-'id'=>'bg_bing',
-'std'=>false,
-'desc'=>__('勾选之后将每日自动更换背景，下方设置为无效','haoui'),
 'type'=>'checkbox'
 );
 $options[] = array(
@@ -889,24 +942,21 @@ $options[] = array(
 	$options[] = array(
 		'name' => __('文章页', 'haoui'),
 		'type' => 'heading');
+
 	$options[] = array(
-		'name' => __('标签', 'haoui'),
-		'id' => 'single_tags',
-		'type' => "checkbox",
-		'std' => true,
-		'desc' => __('开启', 'haoui'));
-	$options[] = array(
-		'name' => __('面包屑导航', 'haoui').' / '.__('用“正文”替代标题', 'haoui'),
+		'name' => __('面包屑导航', 'haoui'),
 		'id' => 'breadcrumbs_single_s',
 		'type' => "checkbox",
 		'std' => true,
 		'desc' => __('开启', 'haoui'));
+
 	$options[] = array(
-		'name' => __('文章简语', 'haoui'),
-		'id' => 'simlang_s',
+		'name' => __('面包屑导航', 'haoui').' / '.__('用“正文”替代标题', 'haoui'),
+		'id' => 'breadcrumbs_single_text',
 		'type' => "checkbox",
 		'std' => true,
-		'desc' => __('开启（一句话概括文章主要内容）', 'haoui'));
+		'desc' => __('开启', 'haoui'));
+
 	$options[] = array(
 		'name' => __('文章摘要', 'haoui'),
 		'id' => 'breadcrumbs_zhaiyao_s',
@@ -950,7 +1000,7 @@ $options[] = array(
 		'id' => 'bigger-share_s',
 		'type' => "checkbox",
 		'std' => true,
-		'desc' => __('开启（请先前往 “页面” 新建 ”分享海报“ 页面，并将固定连接设为 “toimage” 。注意二维码api与左边栏的二维码api是一样的，开启前请确认API可用有效）', 'haoui'));
+		'desc' => __('开启（注意二维码api与左边栏的二维码api是一样的，开启前请确认API可用有效）', 'haoui'));
 	$options[] = array(
 		'id' => 'bigger-share-sub',
 		'desc' => '海报宣传语',
@@ -963,64 +1013,8 @@ $options[] = array(
 		'class' => 'op-multicheck',
 		'std' => $imagepath . 'logo.png',
 		'type' => 'upload');				
-	$options[] = array(
-		'name' => __('海报公章认证', 'haoui'),
-		'id' => 'bigger_gz_s',
-		'type' => "checkbox",
-		'class' => 'op-multicheck',
-		'std' => false,
-		'desc' => __('开启', 'haoui'));
-	$options[] = array(
-		'id' => 'bigger_gz_huzi',
-		'desc' => '海报公章扇形弧字（不得超过6个字）',
-        'class' => 'op-multicheck mini',
-		'std' => '优质资源分享',
-		'type' => 'text');	
-	$options[] = array(
-		'id' => 'bigger_gz_text',
-		'desc' => '海报公章横字（不得超过4个字）',
-        'class' => 'op-multicheck mini',
-		'std' => '唯爱网络',
-		'type' => 'text');	
-		
-		
-	$options[] = array(
-		'name' => __('文章声明', 'haoui'),
-		'id' => 'shengming',
-		'std' => '<em>特别声明：</em>文章多为网络转载，资源使用一般不提供任何帮助，特殊资源除外，如有侵权请联系！',
-		'desc' => __('代码（在文章最上方显示）', 'haoui'),
-		'type' => 'textarea');
-		
-		
-$options[] = array(
-	    'name' => __('文章左边栏是否开启', 'haoui'),
-		'id' => 'left_sd_s',
-		'std' => true,
-		'desc' => __('开启', 'haoui'),
-		'type' => 'checkbox');
 
-	$options[] = array(
-		'id' => 'left_post_authordesc_s',
-		'std' => true,
-		'class' => 'op-multicheck',
-		'desc' => __('文章作者介绍', 'haoui'),
-		'type' => 'checkbox');
-
-
-	$options[] = array(
-		'id' => 'left_qrcode_s',
-		'std' => true,
-		'class' => 'op-multicheck',
-		'desc' => __('文章二维码', 'haoui'),
-		'type' => 'checkbox');
-
-	$options[] = array(
-		'name' => __('自定左边栏义广告', 'haoui'),
-		'id' => 'left_asb_s',
-		'std' => '',
-		'desc' => __('代码', 'haoui'),
-		'type' => 'textarea');
-			
+		
 	$options[] = array(
 		'name' => '打赏',
 		'id' => 'post_rewards_s',
@@ -1189,13 +1183,12 @@ $options[] = array(
 		'std' => false,
 		'desc' => __('开启', 'haoui').__(' 开启后只对前台文章展示有效，对后台编辑器中的格式无效', 'haoui'));
 
-	$options[] = array(
-		'name' => __('自定义背景', 'haoui'),
-		'id' => 'singele-background',
-		'type' => "textarea",
-		'class' => 'op-multicheck',
-		'std' => $imagepath . 'vieu.jpg',
-		'desc' => __('一行一张图片地址，多张图片为随机轮播可输入单张，要求尺寸1920*450', 'haoui'));
+	/*$options[] = array(
+		'name' => __('文章段落缩进', 'haoui'),
+		'id' => 'post_p_s',
+		'type' => "checkbox",
+		'std' => false,
+		'desc' => __('开启', 'haoui'));*/
 
 	$options[] = array(
 		'name' => __('文章页尾版权提示', 'haoui'),
@@ -1277,11 +1270,65 @@ $options[] = array(
 		<p>5、其他下载问题请自行搜索教程，这里不一一讲解。</p>',
 		'desc' => __('代码', 'haoui'),
 		'type' => 'textarea');		
+	// ======================================================================================================================
+	$options[] = array(
+		'name' => __('文章页左边栏', 'haoui'),
+		'type' => 'heading' );
+  
+		
+	$options[] = array(
+	    'name' => __('文章左边栏是否开启', 'haoui'),
+		'id' => 'left_sd_s',
+		'std' => true,
+		'desc' => __('开启', 'haoui'),
+		'type' => 'checkbox');
 
+	$options[] = array(
+		'id' => 'left_post_authordesc_s',
+		'std' => true,
+		'class' => 'op-multicheck',
+		'desc' => __('文章作者介绍', 'haoui'),
+		'type' => 'checkbox');
+
+	$options[] = array(
+		'id' => 'left_qrcode_s',
+		'std' => true,
+		'class' => 'op-multicheck',
+		'desc' => __('文章二维码', 'haoui'),
+		'type' => 'checkbox');
+
+	$options[] = array(
+		'id' => 'left_qrcode_url_s',
+		'class' => 'op-multicheck',
+		'std' => 'https://viapi.cn/qrcode/?text=',
+		'desc' => __('二维码接口', 'haoui'),
+		'type' => 'text');
+
+	$options[] = array(
+		'name' => __('文章标签', 'haoui'),
+		'id' => 'left_tags_s',
+		'std' => true,
+		'desc' => __('开启（文章标签目前在文章左侧，手机端文章内容下）', 'haoui'),
+		'type' => 'checkbox');
+	$options[] = array(
+		'id' => 'left_tags_style',
+		'std' => "left-tags-gray",
+		'type' => "radio",
+		'class' => 'op-multicheck',
+		'options' => array(
+			'left-tags-gray' => __('默认样式', 'haoui'),
+			'left-tags' => __('彩色标签', 'haoui')
+		));
+	$options[] = array(
+		'name' => __('自定义广告', 'haoui'),
+		'id' => 'left_asb_s',
+		'std' => '',
+		'desc' => __('代码', 'haoui'),
+		'type' => 'textarea');
 	
 	
     // ======================================================================================================================
-	/*$options[] = array(
+	$options[] = array(
 		'name' => __('新浪图床', 'haoui'),
 		'type' => 'heading' );
 	
@@ -1291,25 +1338,12 @@ $options[] = array(
 		'std' => false,
 		'desc' => __('开启', 'haoui'),
 		'type' => 'checkbox');
-		$options[] = array(
-	    'name' => __('微博账号', 'haoui'),
-		'id' => 'sinaimg_weibo',
-		'std' => '',
-		'class' => 'mini',
-		'desc' => __('账号', 'haoui'),
-		'type' => 'text');
-		
-		$options[] = array(
-		'id' => 'sinaimg_pass',
-		'std' => '',
-		'class' => 'op-multicheck mini',
-		'desc' => __('密码', 'haoui'),
-		'type' => 'text');
+	
 	$options[] = array(
 		'desc' => __('什么是新浪图床？这个功能是把你网站的图片媒体文件上传到新浪然后提取图片直链调用到你自己的文章内使用，有利于提高网站媒体的加载速度，所有图片将存储在你自己的微博账号之下。'));
 	$options[] = array(
-		'desc' => __('开启前请先新建 <b><i>新浪图传</i></b> 页面，并将固定连接设为 <b><i>sinaimg</i></b> 然后填写账号密码（注意所有的数据都是保存在你自己的数据库，本站并不获取任何用户信息）'));
-*/
+		'desc' => __('开启前请先打开 <b><i>action/sinaimg.php</i></b> 改成自己的微博账号，然后随便上传什么图片试一下，如果有问题看一下 <b><i>action</i></b> 目录下是否生成了 <b><i>sina_config.php</i></b> 文件，如果没有就说明账号没有获取成功，须将 <b><i>action</i></b> 目录设为可写（生成成功后可关闭可写）。如使用一段时间后出现上传出错或是无法上传等问题，删除 <b><i>sina_config.php</i></b> 重新获取一下即可，实在不行换个号'));
+
 	// ======================================================================================================================
 
 
@@ -1337,12 +1371,7 @@ $options[] = array(
 		'desc' => '如果没有合适的页面作为找回密码页面，你需要去新建一个页面再来选择',
 		'options' => $options_pages,
 		'type' => 'select');
-	$options[] = array(
-		'name' => __('用户中心背景', 'haoui'),
-		'id' => 'user_banner_bg',
-		'std' => $imagepath . 'banner.jpg',
-		'desc' => __('尺寸1920*300', 'haoui'),
-		'type' => 'upload');
+
 	$options[] = array(
 		'name' => __('允许用户发布文章', 'haoui'),
 		'id' => 'tougao_s',
@@ -1475,7 +1504,7 @@ $options[] = array(
 	$options[] = array(
 		'id' => 'focusslide_text_'.$i,
 		'desc' => '内容',
-		'std' => '<h3>Vieu主题基于WordPress程序，响应式布局支持电脑、平板和手机的完美展示</h3>',
+		'std' => '<h4>由唯爱网络原创开发，本站为Vieu主题唯一官方站</h4><h3>支持百度熊掌号，适用于垂直站点、科技博客、个人站，扁平化设计、简洁白色、超多功能配置、会员中心、直达链接、自动缩略图<br>Vieu主题基于WordPress程序，响应式布局支持电脑、平板和手机的完美展示</h3>',
 		'class' => 'op-multicheck',
 		'type' => 'textarea');
 	$options[] = array(
@@ -1504,7 +1533,7 @@ $options[] = array(
 		'id' => 'focusslide_href_'.$i,
 		'desc' => __('链接', 'haoui'),
 		'class' => 'op-multicheck',
-		'std' => 'http://www.vizyw.com/3132.html',
+		'std' => 'http://www.nicedowns.com',
 		'type' => 'text');
 
 	$options[] = array(
@@ -1531,7 +1560,7 @@ $options[] = array(
 		'id' => 'focusslide_href_two_'.$i,
 		'desc' => __('链接', 'haoui'),
 		'class' => 'op-multicheck',
-		'std' => 'http://www.vizyw.com/3132.html',
+		'std' => 'http://www.nicedowns.com',
 		'type' => 'text');
 
 	$options[] = array(
@@ -1591,13 +1620,6 @@ $options[] = array(
 		'desc' => __('设置随动模块，多个模块之间用空格隔开即可！默认：“1 2”，表示第1和第2个模块，建议最多3个模块 ', 'haoui'),
 		'type' => 'text');
 
-	$options[] = array(
-		'name' => __('手机端显示', 'haoui'),
-		'id' => 'sideroll_m_s',
-		'std' => false,
-		'desc' => __('开启', 'haoui'),
-		'type' => 'checkbox');
-
 
 	// ======================================================================================================================
 	$options[] = array(
@@ -1612,9 +1634,6 @@ $options[] = array(
 		'desc' => __('限制在多少月内，单位：月', 'haoui'),
 		'type' => 'text');
 
-
-		
-		
 	$options[] = array(
 		'id' => 'readwall_limit_number',
 		'std' => 200,
@@ -1622,11 +1641,11 @@ $options[] = array(
 		'desc' => __('显示个数', 'haoui'),
 		'type' => 'text');
 
-	$options[] = array(
+	/*$options[] = array(
 		'name' => __('页面左侧菜单设置', 'haoui'),
 		'id' => 'page_menu',
 		'options' => $options_pages,
-		'type' => 'multicheck');
+		'type' => 'multicheck');*/
 
 	$options[] = array(
 		'name' => __('友情链接分类选择', 'haoui'),
@@ -1664,12 +1683,6 @@ $options[] = array(
 		'type' => 'textarea');
 		
 	$options[] = array(
-		'name' => __('文章发布邮件通知', 'haoui'),
-		'id' => 'post_email_s',
-		'std' => false,
-		'desc' => '发布文章时向所有用户发送邮件（不建议开启，对服务器要求极高）',
-		'type' => 'checkbox');
-	$options[] = array(
 		'name' => __('文章隐藏内容提示', 'haoui'),
 		'id' => 'collapse_title',
 		'std' => __('阅读全文', 'haoui'),
@@ -1679,36 +1692,19 @@ $options[] = array(
 		'name' => __('评论标题', 'haoui'),
 		'id' => 'comment_title',
 		'std' => __('评论', 'haoui'),
-		'class' => 'op-multicheck',
 		'type' => 'text');
 
 	$options[] = array(
 		'name' => __('评论框默认字符', 'haoui'),
 		'id' => 'comment_text',
 		'std' => __('你的评论可以一针见血', 'haoui'),
-		'class' => 'op-multicheck',
 		'type' => 'text');
 
 	$options[] = array(
 		'name' => __('评论提交按钮字符', 'haoui'),
 		'id' => 'comment_submit_text',
 		'std' => __('提交评论', 'haoui'),
-		'class' => 'op-multicheck',
 		'type' => 'text');
-		
-		$options[] = array(
-		'name' => __('评论间隔时间', 'haoui'),
-		'id' => 'comment_time',
-		'std' => __('60', 'haoui'),
-		'class' => 'op-multicheck mini',
-		'desc' => '单位/秒',
-		'type' => 'text');
-		$options[] = array(
-		'name' => __('必应接口开启随机壁纸', 'haoui'),
-		'id' => 'bing_rand_s',
-		'std' => false,
-		'desc' => '必应接口调用函数 &lt;?php echo bing_img() ?&gt;',
-		'type' => 'checkbox');
 	$options[] = array(
 		'name' => __('文章内全网VIP视频解析', 'haoui'),
 		'id' => 'vieu_video_s',
@@ -1755,13 +1751,13 @@ $options[] = array(
 	$options[] = array(
 		'name' => __('微博', 'haoui'),
 		'id' => 'weibo',
-		'std' => 'http://www.vizyw.com',
+		'std' => 'http://www.nicedowns.com',
 		'type' => 'text');
 
 	$options[] = array(
 		'name' => __('腾讯QQ', 'haoui'),
 		'id' => 'qq',
-		'std' => '1452938190',
+		'std' => '470000334',
 		'type' => 'text');
 
 	$options[] = array(
@@ -1790,21 +1786,16 @@ $options[] = array(
 		'std' => false,
 		'desc' => '手机端不显示',
 		'type' => 'checkbox');	
-/*	$options[] = array(
+	$options[] = array(
 		'desc' => '时间/单位分钟',
 		'id' => 'wintip_time',
 		'std' => '10',
 		'class' => 'mini',
-		'type' => 'text');*/
-	$options[] = array(
-		'desc' => '名称',
-		'id' => 'wintip_h2',
-		'std' => '这绝对不是广告！',
 		'type' => 'text');
 	$options[] = array(
 		'desc' => '标题',
 		'id' => 'wintip_title',
-		'std' => 'Vieu4.0主题',
+		'std' => 'Vieu3.3主题',
 		'type' => 'text');	
 	$options[] = array(
 		'desc' => '按钮文字',
@@ -1814,18 +1805,13 @@ $options[] = array(
 	$options[] = array(
 		'desc' => '跳转链接',
 		'id' => 'wintip_url',
-		'std' => 'http://www.vizyw.com/3132.html',
+		'std' => 'http://www.nicedowns.com',
 		'type' => 'text');	
 	$options[] = array(
 		'id' => 'wintip_blank',
 		'std' => false,
 		'desc' => '新窗口打开',
 		'type' => 'checkbox');	
-	$options[] = array(
-		'id' => 'wintip_img',
-		'std' => $imagepath . 'wintip.png',
-		'desc' => '广告图宽度为170px',
-		'type' => 'upload');	
 	$options[] = array(
 		'desc' => __('内容'),
 		'id' => 'wintip_asb',

@@ -7,8 +7,9 @@ if( !have_posts() ){
 	exit;
 }
 ?>
-<section class="container">	
 
+<section class="container">	
+<?php _the_ads($name='ads_search_01', $class='asb-search asb-search-01') ?>
 			<div class="pagetitle"><h1><?php echo $s; ?> 的搜索结果</h1></div>
 	<div class="content-wrap">
 
@@ -18,7 +19,6 @@ if( !have_posts() ){
 				get_template_part( 'excerpt' ); 
 				_moloader('mo_paging');
 			?>
-			<?php _the_ads($name='ads_search_01', $class='asb-search asb-search-01') ?>
 		</div>
 	</div>
 	<?php get_sidebar(); ?>

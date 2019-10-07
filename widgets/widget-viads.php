@@ -41,7 +41,7 @@ class widget_ui_viads extends WP_Widget {
 			'content' => '专注于网络资源搜集共享 - www.relzz.com', 
 			'link' => 'http://www.relzz.com',
 			'style' => 'pilot-box5',
-			'img' => 'http://viapi.oss-cn-hangzhou.aliyuncs.com/update/img/music.gif'
+			'img' => 'http://img03.sogoucdn.com/app/a/100520146/6be7b8f47305769a68ac8d7fd0e1099f'
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
 ?>

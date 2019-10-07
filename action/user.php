@@ -170,8 +170,7 @@ switch ($ui['action']) {
 			'url' => $udata->user_url,
 			'qq' => get_user_meta( $cuid, 'qq', true ),
 			'weixin' => get_user_meta( $cuid, 'weixin', true ),
-			'weibo' => get_user_meta( $cuid, 'weibo', true ),
-			'text' => get_user_meta( $cuid, 'text', true )
+			'weibo' => get_user_meta( $cuid, 'weibo', true )
 		);
 
 		break;
@@ -259,10 +258,7 @@ switch ($ui['action']) {
             print_r(json_encode(array('error'=>1, 'msg'=>'微信字数过长，限制在30字内')));  
             exit();  
         }
-        if( $ui['text'] && sstrlen($ui['text'])>100 ) {  
-            print_r(json_encode(array('error'=>1, 'msg'=>'字数过长，限制在100字内')));  
-            exit();  
-        }
+
         /*if( is_disable_username($ui['nickname']) ){
         // if( !current_user_can('edit_posts') && is_disable_username($ui['nickname']) ){
         	print_r(json_encode(array('error'=>1, 'msg'=>'昵称含保留或非法字符，换一个再试')));  
@@ -279,7 +275,7 @@ switch ($ui['action']) {
         if( $ui['weibo'] ) update_user_meta($cuid, 'weibo', $ui['weibo']);
         if( $ui['weixin'] ) update_user_meta($cuid, 'weixin', $ui['weixin']);
         if( $ui['qq'] ) update_user_meta($cuid, 'qq', $ui['qq']);
-        if( $ui['text'] ) update_user_meta($cuid, 'text', $ui['text']);
+
         // require_once( ABSPATH.WPINC.'/registration.php' );
         $datas = array('ID' => $cuid);
 

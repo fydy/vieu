@@ -2,15 +2,13 @@
 /*
 Template Name: 在线下载
 */
-
-  $str = $_GET['key'];
-  $i = base64_decode($str);
-  $pid = substr($i,0,strrpos($i,"&"));
-  $key = substr($i,strripos($i,"&")+1);
+ 
+  $pid = $_GET['pid'];
+  $key = $_REQUEST['key'];
   $rand1=get_post_meta($pid, 'down_rand1', true);
   $rand2=get_post_meta($pid, 'down_rand2', true);
-  $okkey=$rand1+$rand2;
-  if(empty($key) && empty($pid) && $okkey!=$key){Header('Location:'.get_permalink($pid));}elseif($okkey==$key){
+  $nokey=$key-$rand1;
+  if(empty($key) && $nokey!=$rand2){Header('Location:'.get_permalink($pid));}elseif($nokey==$rand2){$body=$key;}
               if (_hui('down_blank_s')){  
 		        $down_name=get_post_meta($pid, 'down_name', true);
 		        $down_size=get_post_meta($pid, 'down_size', true);
@@ -31,7 +29,7 @@ Template Name: 在线下载
 		
 				$down_url_text1 = '';$down_key_text1 = '';$down_url_text2 = '';$down_key_text2 = '';$down_url_text3 = '';$down_key_text3 = '';$down_key_text4 = '';
 				if ($down_key_1){$down_key_text1 = '&nbsp;&nbsp;<span>密码：'.$down_key_1.'</span>';}
-				if ($down_demo_url){$down_demo_url_text = '<li><a href="'.home_url().'/demo?pid='.$pid.'"><span class="glyphicon glyphicon-eye-open"></span> 在线演示</a></li>';}
+				if ($down_demo_url){$down_demo_url_text = '<li><a href="'.home_url().'/demo?pid='.$pid.'" target="_blank"><span class="glyphicon glyphicon-eye-open"></span> 在线演示</a></li>';}
 				if ($down_url_1){$down_url_text1 = '<a class="btn btn-primary" href="'.$down_url_1.'" target="_blank"><i class="glyphicon glyphicon-cloud-download"></i> 百度云盘'.$down_key_text1.'</a>';}
 				if ($down_key_2){$down_key_text2 = '&nbsp;&nbsp;<span>密码：'.$down_key_2.'</span>';}
 				if ($down_url_2){$down_url_text2 = ' <a class="btn btn-danger" href="'.$down_url_2.'" target="_blank"><i class="glyphicon glyphicon-cloud-download"></i> 蓝奏云盘'.$down_key_text2.'</a>';}
@@ -68,7 +66,7 @@ Template Name: 在线下载
 		   '._hui('down_xqsm').'</div>
 				</div>';
 			  }
-  }else{Header('Location:'.get_permalink($pid));}
+				
            
 ?>
     
@@ -80,7 +78,7 @@ Template Name: 在线下载
     <meta name="keywords" content="下载" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link type="text/css" href="https://lib.baomitu.com/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-	<link type="text/css" href="<?php echo get_stylesheet_directory_uri() ?>/static/css/down.css" rel="stylesheet">
+	<link type="text/css" href="<?php echo get_stylesheet_directory_uri() ?>/css/down.css" rel="stylesheet">
     <title>Down：<?php echo get_the_title($pid); ?>–<?php echo get_bloginfo( 'name') ?></title>
   
   </head>

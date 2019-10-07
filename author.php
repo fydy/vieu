@@ -6,7 +6,6 @@ global $wp_query;
 $curauth = $wp_query->get_queried_object();
 
 ?>
-<style>.sidebar{margin-top: 95px;}</style>
 <div class="focusslide_bottom"></div>
 <section class="container">
 	<div class="content-wrap">

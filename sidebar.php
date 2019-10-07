@@ -1,7 +1,7 @@
 <?php if( _hui('layout') == '1' ) return; 
-echo'<div class="wzsid sidebar"'; if(is_single()){echo'style="margin-top:15px;"';} echo'>';?>
+echo'<div class="wzsid sidebar"'; if(is_single()){echo'style="margin-top:0px;"';} echo'>';?>
 <?php 
-
+	_moloader('mo_notice', false);
 	
 	if (function_exists('dynamic_sidebar')){
 		dynamic_sidebar('gheader'); 
